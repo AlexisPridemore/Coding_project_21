@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Gallery from './components/Gallery'; // make sure the path is correct
 
-const url = 'https://course-api.com/react-tours-project';
+const url = 'https://www.course-api.com/react-tours-project';
 
 const App = () => {
   const [tours, setTours] = useState([]);
@@ -11,11 +11,12 @@ const App = () => {
   const fetchTours = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://course-api.com/react-tours-project');
+      const response = await fetch('https://www.course-api.com/react-tours-project');
       if (!response.ok) {
         throw new Error('Failed to fetch tours');
       }
       const data = await response.json();
+      console.log(data);
       setTours(data);
       setError(null);
     } catch (err) {
