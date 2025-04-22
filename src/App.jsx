@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Gallery from './components/Gallery'; // make sure the path is correct
+
+const url = 'https://course-api.com/react-tours-project';
 
 const App = () => {
   const [tours, setTours] = useState([]);
@@ -17,6 +20,7 @@ const App = () => {
       setError(null);
     } catch (err) {
       setError(err.message);
+      setTours([]); // clear tours if error occurs
     } finally {
       setLoading(false);
     }
@@ -25,6 +29,10 @@ const App = () => {
   useEffect(() => {
     fetchTours();
   }, []);
+
+  const removeTour = (id) => {
+    setTours((prevTours) => prevTours.filter((tour) => tour.id !== id));
+  };
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -46,21 +54,9 @@ const App = () => {
   return (
     <div>
       <h1>Tours</h1>
-      <ul>
-        {tours.map((tour) => (
-          <li key={tour.id}>{tour.name}</li>
-        ))}
-      </ul>
+      <Gallery tours={tours} onRemove={removeTour} />
     </div>
   );
 };
 
-if (loading) {
-  return <h2>Loading...</h2>;
-}
-
-if (error) {
-  return <h2>Error: {error}</h2>;
-}
-
-return <Gallery tours={tours} />;
+export default App;
