@@ -46,4 +46,12 @@ const App = () => {
   );
 };
 
-export default App;
+if (loading) {
+  return <h2>Loading...</h2>;
+}
+
+if (error) {
+  return <h2>Error: {error}</h2>;
+}
+
+return <Gallery tours={tours} />;
