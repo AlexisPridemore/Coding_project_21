@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 const TourCard = ({ tour, onRemove }) => {
-    const { id, name, info, image, price } = tour;
+    const { id, name, info = '', image, price } = tour;
     const [showInfo, setShowInfo] = useState(false);
 
     return (
         <div className="tour-card" style={styles.card}>
-            <img src={image} alt={name} style={styles.image} />
+            {image && <img src={image} alt={name} style={styles.image} />}
             <div style={styles.content}>
                 <h2>{name}</h2>
-                <h4 style={styles.price}>${price}</h4>
+                <h4 style={styles.price}>${parseFloat(price).toFixed(2)}</h4>
                 <p>
                     {showInfo ? info : `${info.substring(0, 100)}...`}
                     <button
